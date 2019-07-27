@@ -1,0 +1,54 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>....</title>
+</head>
+
+<body>
+    <div id="users">
+        <table>
+            <tr v-for="user in users">
+                <td>{{user.name}}</td>
+                <td>{{user.age}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- версия для разработки, отображает полезные предупреждения в консоли -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        window.addEventListener('load', function() {
+
+            const users = [
+                {
+                    name: "John Doe",
+                    age: 25
+                },
+                {
+                    name: "Samantha Smith",
+                    age: 32
+                },
+                {
+                    name: "Peter Black",
+                    age: 15
+                },
+                {
+                    name: "Martha Green",
+                    age: 22
+                }
+            ];
+
+            const app = new Vue({
+                el: '#users',
+                data: {
+                    users
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

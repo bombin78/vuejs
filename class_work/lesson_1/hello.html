@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Hello world</title>
+</head>
+
+<body>
+    <div id="hello">
+        <h1>{{message}}</h1>
+        <p>{{counter}}</p>
+
+        <div v-if="counter > 5">
+            Вы щелкнули слишком много раз!
+        </div>
+
+        <ul>
+            <li v-for="item in greetings">{{ item }}</li>
+        </ul>
+
+        <button v-on:click="counter++">+</button>
+        <button v-on:click="counter--">-</button>
+    </div>
+
+    <!-- версия для разработки, отображает полезные предупреждения в консоли -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // дожиждаемся загрузки документа, т.к. будум взаимодействовать с random
+        // т.е. Vue будут использовать наш документ
+        window.addEventListener('load', function() {
+
+            const greetings = ['Hey there!', 'Whats up?', 'Hi'];
+
+            // cоздаем эеземпляр приложения, а точнее - корневой элемент
+            const app = new Vue({
+                // блок, в котором находится результат работы Vue
+                el: '#hello',
+                // набор свойств, изменения которых вью будет отслеживать и реактивно обновлять DOM
+                data: {
+                    message: 'Hello World!',
+                    counter: 0,
+                    greetings //greetings: greetings
+                }
+            });
+
+            setInterval(function() {
+                // изменяем свойство объекта app, которое реактивно вызывает обновление разметки
+                app.message = greetings[~~(Math.random() * greetings.length)];
+            },1000);
+
+        });
+    </script>
+</body>
+
+</html>

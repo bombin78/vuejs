@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор стоимости услуг</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" id="discounts">
+        <h1 class="my-4">Выберите курсы</h1>
+        <div class="row">
+            <div class="col-sm-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Название курса</th>
+                            <th>Макс.</th>
+                            <th>Сред.</th>
+                            <th>Мин.</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="course in courses">
+                            <td>{{course.title}}</td>
+                            <td :class="getSelectedClass(course, key)"
+                                @click="chooseCourse(course, key)"
+                                v-for="(price, key) in course.prices">
+                                {{price}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-5">
+                <div class="card-body">
+                    <template v-if="selectedCourses.length">
+                        <div class="h5 mb-3">Выбранные курсы</div>
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr v-for="item in selectedCourses">
+                                    <td>{{item.course.title}}</td>
+                                    <td>{{item.price}}</td>
+                                    <td>{{item.discountPrice}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th class="text-right" colspan="2">
+                                        Итого
+                                    </th>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            </tfoot>
+
+                        </table>
+
+                        <div class="checkbox">
+                            <label><input type="checkbox"> Со своим ноутбуком</label>
+                        </div>
+                        <div class="checkbox">
+                            <label class="checkbox"><input type="checkbox"> Вместе дешевле</label>
+                        </div>
+                    </template>
+                    <div v-else class="alert alert-info">Курсы не выбраны</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./calc.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
