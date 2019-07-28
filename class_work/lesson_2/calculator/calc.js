@@ -71,18 +71,34 @@ window.addEventListener('load', function(){
 
             chooseCourse(course, tax){
 
-                this.selectedCourses = this.selectedCourses.filter(item => item.course.code !== course.code);
+                let inList = false;
 
-                this.selectedCourses.push({
-                    course,
-                    tax,
-                    price: course.prices[tax],
-                    discountPrice: course.prices[tax]
+                // Переформирование массива с выбранными курсами:
+                // возвращаем только те курсы, которые не совпадают
+                // с вновь выбранным по коду
+                this.selectedCourses = this.selectedCourses.filter(item => {
+
+                    if (item.course.code === course.code && item.tax === tax) {
+                        inList = true;
+                    }
+                    return item.course.code !== course.code;
                 });
+
+                // Добавляем вновь выбранный курс только,
+                // если не было полного совпадения (включая тип цены)
+                if (!inList) {
+
+                    this.selectedCourses.push({
+                        course,
+                        tax,
+                        price: course.prices[tax],
+                        discountPrice: course.prices[tax]
+                    });
+                }
             },
 
             getSelectedClass(course, tax) {
-                let inList = this.selectedCourses.some(item => item.course === course && item.tax === tax);
+                let inList = this.selectedCourses.some(item => item.course.code === course.code && item.tax === tax);
 
                 return {
                     'bg-success text-white': inList
