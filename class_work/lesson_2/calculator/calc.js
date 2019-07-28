@@ -70,6 +70,9 @@ window.addEventListener('load', function(){
         methods: {
 
             chooseCourse(course, tax){
+
+                this.selectedCourses = this.selectedCourses.filter(item => item.course.code !== course.code);
+
                 this.selectedCourses.push({
                     course,
                     tax,
