@@ -1,123 +1,19 @@
-<!DOCTYPE>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <title>Обработка форм</title>
+    <title>....</title>
 </head>
 
 <body>
     <div id="app">
-        <input type="text" v-model="message">
-        <button @click="changeText()">Поменять текст</button>
-        <!-- или <button @click="changeText">Поменять текст</button> -->
-        <hr>
-        {{message}}
-
-        <hr>
-
-        <input type="text" v-model="valFirst">
-        <input type="text" v-model="valSecond">
-        <button @click="sumValue()">+</button>
-        <button @click="subValue()">-</button>
-        <button @click="multValue()">*</button>
-        <button @click="devValue()">/</button>
-        <br>
-        <br>
-        {{result}}
-        {{history.length}}
-        <template v-if="history.length">
-            <h2>История операций</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>A</th>
-                        <th>Действие</th>
-                        <th>B</th>
-                        <th>C</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in history">
-                        <td>{{item.a}}</td>
-                        <td>{{item.sign}}</td>
-                        <td>{{item.b}}</td>
-                        <td>{{item.c}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </template>
 
     </div>
 
     <!-- версия для разработки, отображает полезные предупреждения в консоли -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-        window.addEventListener('load', function(){
-            new Vue({
-                el: '#app',
-                data: {
-                    message: 'Hello World!',
-                    valFirst: null,
-                    valSecond: null,
-                    result: null,
-                    textResult: '',
-                    history: []
-                },
 
-                // функции, объявленные в объекте methods
-                // можно использовать в шаблонах и в других частях приложения
-                methods: {
-                    changeText(){
-                        // для доступа к данным нужно использовать переменную this
-                        // она автоматически привязана к объекту приложения
-                        this.message = 'Hey there!';
-                    },
-
-                    sumValue(){
-
-                        this.result = Number(this.valFirst) + Number(this.valSecond);
-                        this.textResult = `Результат сложения ${this.valFirst} на ${this.valSecond} = ${this.result}`;
-
-                        this.addHistory('+');
-                    },
-
-                    subValue(){
-
-                        this.result = this.valFirst - this.valSecond;
-                        this.textResult = `Результат сложения ${this.valFirst} на ${this.valSecond} = ${this.result}`,
-
-                        this.addHistory('-');
-                    },
-                    multValue(){
-
-                        this.result = this.valFirst * this.valSecond;
-                        this.textResult = `Результат умножения  ${this.valFirst} + на  ${this.valSecond} = ${this.result}`;
-
-                        this.addHistory('*');
-                    },
-                    devValue(){
-
-                        this.result = this.valFirst / this.valSecond;
-                        this.textResult = `Результат деления  ${this.valFirst} + на  ${this.valSecond} = ${this.result}`;
-
-                        this.addHistory('/');
-                    },
-                    addHistory(sign) {
-                        
-                        if(this.result) {
-                            this.history.push({
-                                a: this.valFirst,
-                                b: this.valSecond,
-                                c: this.result,
-                                sign: sign
-                            });
-                        }
-
-                    }
-                }
-            });
-        });
     </script>
 </body>
 
