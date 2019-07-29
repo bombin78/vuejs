@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -14,7 +15,7 @@
         </div>
         <div>
             <label for="new-user">Добавить пользователя </label>
-            <input id="new-user" v-on:keyup.enter="getUsers()" v-model="newUser">
+            <input id="new-user" v-on:keyup.enter="setUsers()" v-model="newUser">
         </div>
         <br>
         <div>Отмеченные имена: {{ getCheckedNames() }}</div>
@@ -54,7 +55,7 @@
                         return listCheckedNames.join('; ');
                     },
 
-                    getUsers() {
+                    setUsers() {
                         let isExist = this.users.some(item => item === this.newUser);
 
                         if(isExist) {
