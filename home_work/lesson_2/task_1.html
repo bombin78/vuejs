@@ -11,7 +11,6 @@
         <div v-for="(user, key) in users">
             <label v-bind:for="users[key]">{{users[key]}}</label>
             <input v-bind:id="users[key]" type="checkbox" v-model="checkedNames[key]">
-            <!-- <input type="checkbox" v-model="setSelectedUsers(user)" > -->
         </div>
         <div>
             <label for="new-user">Добавить пользователя </label>
