@@ -13,9 +13,10 @@
             <label v-bind:for="users[key]">{{users[key]}}</label>
             <input v-bind:id="users[key]" type="checkbox" v-model="checkedNames[key]">
         </div>
+        <br>
         <div>
             <label for="new-user">Добавить пользователя </label>
-            <input id="new-user" v-on:keyup.enter="setUsers()" v-model="newUser">
+            <input id="new-user" v-on:keyup.enter="setUser()" v-model="newUser">
         </div>
         <br>
         <div>Отмеченные имена: {{ getCheckedNames() }}</div>
@@ -34,7 +35,7 @@
                 data: {
                     users,
                     checkedNames: [],
-                    newUser: ''
+                    newUser: null
                 },
 
                 methods: {
@@ -55,7 +56,7 @@
                         return listCheckedNames.join('; ');
                     },
 
-                    setUsers() {
+                    setUser() {
                         let isExist = this.users.some(item => item === this.newUser);
 
                         if(isExist) {
