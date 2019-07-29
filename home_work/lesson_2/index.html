@@ -1,0 +1,74 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Список пользователей</title>
+</head>
+
+<body>
+
+    <div id="app">
+        <div v-for="(user, key) in users">
+            <label v-bind:for="users[key]">{{users[key]}}</label>
+            <input v-bind:id="users[key]" type="checkbox" v-model="checkedNames[key]">
+            <!-- <input type="checkbox" v-model="setSelectedUsers(user)" > -->
+        </div>
+        <div>
+            <label for="new-user">Добавить пользователя </label>
+            <input id="new-user" v-on:keyup.enter="getUsers()" v-model="newUser">
+        </div>
+        <br>
+        <div>Отмеченные имена: {{ getCheckedNames() }}</div>
+    </div>
+
+    <!-- версия для разработки, отображает полезные предупреждения в консоли -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        const users = ["Иван", "Мария", "Светлана", "Сергей"];
+
+        window.addEventListener('load', function(){
+            const app = new Vue({
+
+                el: '#app',
+
+                data: {
+                    users,
+                    checkedNames: [],
+                    newUser: ''
+                },
+
+                methods: {
+
+                    getCheckedNames() {
+
+                        let listCheckedNames = [];
+
+                        this.users.forEach((item, index) => {
+
+                            if (this.checkedNames[index]) {
+                                listCheckedNames.push(this.users[index]);
+                            } else {
+                                listCheckedNames.splice(index,1);
+                            }
+                        });
+
+                        return listCheckedNames.join('; ');
+                    },
+
+                    getUsers() {
+                        let isExist = this.users.some(item => item === this.newUser);
+
+                        if(isExist) {
+                            alert(`Пользователь ${this.newUser} уже существует`)
+                        } else {
+                            this.users.push(this.newUser);
+                        }
+                    }
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>
