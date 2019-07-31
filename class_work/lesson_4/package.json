@@ -1,0 +1,15 @@
+{
+  "name": "lesson_4",
+  "version": "1.0.0",
+  "description": "1. Создать в корне проекта package.json с параметрами по умолчанию   `npm init -y`",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+      "vue": 2.6.10
+  }
+}
