@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container" id="app">
+
+        <h1 class="my-4">Список публикаций</h1>
+
+        <div v-for="post in posts" class="card mb-4">
+            <div class="card-header">
+                Публикация <strong>{{post.author}}</strong> от {{post.date}}
+            </div>
+
+            <div class="card-body" v-html="post.content"></div>
+
+        </div>
+
+        <button @click="toggleFormVisibility"
+            class="btn btn-primary"
+            :class="buttonClass"
+            type="button">
+            {{ buttonCaption }}
+        </button>
+
+        <div v-show="formIsVisible" class="card my-4">
+
+            <div class="card-header">Добавьте публикацию</div>
+
+            <form @submit.prevent="addPost" class="card-body" action="#" method="post">
+
+                <alert v-if="formHasError" type="danger" :text="validationError"></alert>
+
+                <div class="form-group">
+                    <label for="authorName">Ваше имя</label>
+                    <input v-model="authorName" class="form-control" id="authorName" type="text">
+                </div>
+
+                <div class="form-group">
+                    <label for="publishedDate">Дата публикации</label>
+                    <datepicker input-class="form-control" v-model="publishDate" id="publishedDate"></datepicker>
+                </div>
+
+                <div class="form-group">
+                    <label for="postContent">Текст</label>
+                    <tinymce v-model="postContent" id="postContent"></tinymce>
+                </div>
+
+                <button class="btn btn-success" type="submit">Добавить</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/x-template" id="alert-template">
+        <div class="alert" :class="alertClass">{{ text }}</div>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuejs-datepicker"></script>
+    <script src="https://unpkg.com/@tinymce/tinymce-vue@2.1.0/lib/browser/tinymce-vue.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

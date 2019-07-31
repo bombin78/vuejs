@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Пример компонента для Vue</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="app" class="container">
+        <h1 class="mb-4"></h1>
+
+        <input v-model="seen" id="check" type="checkbox">
+        <label for="#check">Показать сообщение</label>
+
+        <alert v-if="seen" type="danger" text="Это текст сообщения"></alert>
+        <alert type="success" :text="message"></alert>
+
+        <input v-model="message" type="text">
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script type="text/x-template" id="alert-template">
+        <div class="alert" :class="alertClass">{{ text }}</div>
+    </script>
+
+    <script>
+        window.addEventListener("load", function() {
+
+            Vue.component('alert', {
+
+                template: '#alert-template',
+
+                props: ['type', 'text'],
+
+                computed: {
+
+                    alertClass(){
+                        return {
+                            'alert-success': this.type === 'success',
+                            'alert-info': this.type === 'info',
+                            'alert-danger': this.type === 'danger'
+                        }
+                    }
+                }
+
+            });
+
+            new Vue({
+
+                el: "#app",
+
+                data: {
+                    seen: true,
+                    message: 'Это еще одно сообщения'
+                }
+
+            });
+        });
+    </script>
+</body>
+
+</html>

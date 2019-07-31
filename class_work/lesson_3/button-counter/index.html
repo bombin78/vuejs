@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <title>....</title>
+</head>
+
+<body>
+    <div id="app">
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+        <button-counter></button-counter>
+    </div>
+
+
+    <script type="text/x-template" id="button-template">
+        <button class="btn btn-secondary" type="button" @click='click'>Кликов - {{ count }}</button>
+    </script>
+
+    <!-- версия для разработки, отображает полезные предупреждения в консоли -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        Vue.component('button-counter', {
+
+            template: '#button-template',
+
+            data() {
+                return {
+                    count: 0
+                }
+            },
+
+            methods: {
+
+                click() {
+                    this.count ++;
+                }
+
+            }
+        });
+
+        const app = new Vue ({
+            el: '#app'
+        });
+
+    </script>
+</body>
+
+</html>
