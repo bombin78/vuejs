@@ -1,0 +1,27 @@
+{
+  "name": "lesson_4",
+  "version": "1.0.0",
+  "description": "1. Создать в корне проекта package.json с параметрами по умолчанию   `npm init -y`",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx webpack -p --config=./webpack.common.config.js",
+    "start": "webpack-dev-server --color --hot --config=./webpack.common.config.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "devDependencies": {
+    "css-loader": "^3.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "node-sass": "^4.12.0",
+    "sass-loader": "^7.1.0",
+    "vue-loader": "^15.7.1",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.38.0",
+    "webpack-cli": "^3.3.6"
+  }
+}
