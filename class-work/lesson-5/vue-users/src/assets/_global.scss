@@ -1,0 +1,13 @@
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+// для сторонних плагинов
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+body {
+    font-size: 1.6rem;
+}
