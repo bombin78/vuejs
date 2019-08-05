@@ -12,12 +12,27 @@
     </template>
     <Alert text="Это содержимое нашего окна" />
   </Modal>
+
+  <section>
+      <h2>Вход и регистрация на сайт</h2>
+
+      <button @click="currentForm='LoginForm'">Вход</button>
+      <button @click="currentForm='RegisterForm'">регистрация</button>
+      <button @click="currentForm='RecoveryForm'">Восстановление доступа</button>
+
+      <keep-alive>
+        <component :is="currentForm" />
+      </keep-alive>
+  </section>
 </div>
 </template>
 
 <script>
 import Alert from './components/Alert.vue';
 import Modal from './components/Modal.vue';
+import LoginForm from './components/LoginForm.vue';
+import RegisterForm from './components/RegisterForm.vue';
+import RecoveryForm from './components/RecoveryForm.vue';
 
 export default {
 
@@ -25,13 +40,17 @@ export default {
 
   components: {
     Alert,
-    Modal
+    Modal,
+    LoginForm,
+    RegisterForm,
+    RecoveryForm,
   },
 
   data() {
     return {
       users: [],
-      modalIsVisible: false
+      modalIsVisible: false,
+      currentForm: 'LoginForm'
     }
   },
 
