@@ -66,7 +66,7 @@ export default {
       drawerIsVisible: true,
       navigationLinks: [
         {title: 'Список тестов', href: '/', icon: 'mdi-playlist-check'},
-        {title: 'Добавление теста', href: '/quis', icon: 'mdi-plus-circle-outline'},
+        {title: 'Добавление теста', href: '/quiz', icon: 'mdi-plus-circle-outline'},
         {title: 'Список категорий', href: '/categories', icon: 'mdi-format-list-bulleted'},
         {title: 'Справочник', href: '/about', icon: 'mdi-help'},
       ],

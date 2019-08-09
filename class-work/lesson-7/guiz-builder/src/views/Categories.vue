@@ -1,5 +1,5 @@
 <template lang="html">
-  <h1>Страница добавления текста</h1>
+  <h1>Список категорий</h1>
 </template>
 
 <script>
