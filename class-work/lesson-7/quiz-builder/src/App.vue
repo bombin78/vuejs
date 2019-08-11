@@ -30,14 +30,10 @@
 
       <v-divider></v-divider>
 
-      <v-list-item
-        v-for="link in navigationLinks"
-        :key="link.title"
-        link :to="link.href"
-        color="green">
+      <v-list-item v-for="link in navigationLinks" :key="link.title" link :to="link.href" color="green">
         <v-list-item-icon>
           <v-icon>{{link.icon}}</v-icon>
-          </v-list-item-icon>
+        </v-list-item-icon>
         <v-list-item-content>
           <v-list-item-title>
             {{link.title}}
@@ -61,16 +57,31 @@ export default {
 
   name: 'App',
 
-  data () {
+  data() {
     return {
       drawerIsVisible: true,
-      navigationLinks: [
-        {title: 'Список тестов', href: '/', icon: 'mdi-playlist-check'},
-        {title: 'Добавление теста', href: '/quiz', icon: 'mdi-plus-circle-outline'},
-        {title: 'Список категорий', href: '/categories', icon: 'mdi-format-list-bulleted'},
-        {title: 'Справочник', href: '/about', icon: 'mdi-help'},
+      navigationLinks: [{
+          title: 'Список тестов',
+          href: '/',
+          icon: 'mdi-playlist-check'
+        },
+        {
+          title: 'Добавление теста',
+          href: '/quiz',
+          icon: 'mdi-plus-circle-outline'
+        },
+        {
+          title: 'Список категорий',
+          href: '/categories',
+          icon: 'mdi-format-list-bulleted'
+        },
+        {
+          title: 'Справочник',
+          href: '/about',
+          icon: 'mdi-help'
+        },
       ],
-    }
+    };
   },
 
   methods: {

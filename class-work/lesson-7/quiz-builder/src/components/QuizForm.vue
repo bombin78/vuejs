@@ -5,7 +5,7 @@
 
         <v-flex class="xs6">
           <v-text-field
-            v-model="name"
+            v-model="testParams.name"
             :counter="10"
             :rules="nameRules"
             label="Название теста"
@@ -14,7 +14,7 @@
 
         <v-flex class="xs6">
           <v-select
-            v-model="select"
+            v-model="testParams.category"
             :items="categories"
             item-text="title"
             item-value="id"
@@ -27,7 +27,7 @@
           <v-textarea
             name="input-7-1"
             label="Примечание к тексту"
-            value=""
+            v-model="testParams.note"
             hint="Hint text"
           ></v-textarea>
         </v-flex>
@@ -38,29 +38,22 @@
 </template>
 
 <script>
+
 export default {
 
   name: 'QuizQuestion',
 
-  props: ['categories'],
+  props: ['categories', 'testParams'],
 
   data: () => ({
     valid: true,
-    name: '',
     nameRules: [
       v => !!v || 'Name is required',
       v => (v && v.length <= 10) || 'Name must be less than 10 characters',
     ],
-    select: null,
-    // items: [
-    //   'Item 1',
-    //   'Item 2',
-    //   'Item 3',
-    //   'Item 4',
-    // ]
   }),
 
-  methods: {
+  //methods: {
     // validate () {
     //   if (this.$refs.form.validate()) {
     //     this.snackbar = true
@@ -72,7 +65,7 @@ export default {
     // resetValidation () {
     //   this.$refs.form.resetValidation()
     // },
-  },
+  //},
 }
 </script>
 
