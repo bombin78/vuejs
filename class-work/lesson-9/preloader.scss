@@ -1,0 +1,47 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100000 !important;
+  background: #111;
+  transition: 0.7s;
+
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 2px solid forestgreen;
+  }
+
+  &::before {
+    border-top-color: transparent;
+    animation: preloaderFirst 2s infinite linear;
+  }
+
+  &::after {
+    border-left-color: transparent;
+    animation: preloaderSecond 4s infinite linear;
+  }
+
+  &--hidden {
+    opacity: 0;
+  }
+}
+
+@keyframes preloaderFirst {
+  0% { transform: translate(-50%,-50%) scale(0.8) rotate(0); }
+  50% { transform: translate(-50%,-50%)  scale(1) rotate(360deg); }
+  100% { transform: translate(-50%,-50%) scale(0.8) rotate(0); }
+}
+
+@keyframes preloaderSecond {
+  0% { transform: translate(-50%,-50%) scale(1) rotate(0); }
+  50% { transform: translate(-50%,-50%)  scale(1.5) rotate(360deg); }
+  100% { transform: translate(-50%,-50%) scale(1) rotate(0); }
+}
