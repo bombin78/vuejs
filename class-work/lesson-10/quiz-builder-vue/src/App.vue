@@ -36,6 +36,7 @@
   </v-app-bar>
 
   <v-content>
+    <v-progress-linear v-if="$store.state.showPreloader" indeterminate color="success" />
     <v-container>
       <router-view />
     </v-container>
@@ -89,6 +90,10 @@ export default {
     this.$store.dispatch("LOAD_CATEGORIES").catch(console.log);
     this.$store.dispatch("LOAD_TESTS").catch(console.log);
   },
+  mounted() {
+    const preloader = document.querySelector(".preloader");
+    preloader.style.display = "none";
+  }
 };
 </script>
 

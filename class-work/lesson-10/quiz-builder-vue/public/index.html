@@ -8,11 +8,29 @@
     <title>Конструктор тестов</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <style>
+        .preloader {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #333;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin: -100px 0 0 -100px;
+            z-index: 10;
+            animation: 1s rotate infinite;
+        }
+
+        @keyframes rotate {
+            100% {transform: rotate(360deg);}
+        }
+    </style>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but it-test-editor doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
+    <div class="preloader"></div>
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

@@ -15,6 +15,7 @@ export default new Vuex.Store({
       brief: "",
       category: null,
       questions: [],
+      showPreloader: false,
     },
   },
   mutations: {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
         state.tests.splise(index, 1, test);
       }
     },
+    SET_PRELOADER(state, status) {
+      state.showPreloader = status;
+    },
   },
   actions: {
     async LOAD_CATEGORIES({ commit }) {
@@ -58,6 +62,12 @@ export default new Vuex.Store({
     },
     async LOAD_TESTS({ commit }) {
       commit("SET_TESTS", await Tests.all());
+    },
+    async SHOW_PRELOADER({ commit }) {
+      commit("SET_PRELOADER", true);
+    },
+    async HIDE_PRELOADER({ commit }) {
+      commit("SET_PRELOADER", false);
     },
   },
 });

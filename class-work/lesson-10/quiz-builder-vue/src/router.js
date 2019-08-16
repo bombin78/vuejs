@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import store from "./store";
 
 Vue.use(Router);
 
@@ -13,7 +14,7 @@ const router = new Router({
       name: "home",
       component: Home,
       meta: {
-          title: "Главная страница конструктора",
+        title: "Главная страница конструктора",
       },
     },
     {
@@ -21,7 +22,7 @@ const router = new Router({
       name: "about",
       component: () => import(/* webpackChunkName: "about" */ "./views/About.vue"),
       meta: {
-          title: "Справочник",
+        title: "Справочник",
       },
     },
     {
@@ -29,7 +30,7 @@ const router = new Router({
       name: "categories",
       component: () => import(/* webpackChunkName: "categories" */ "./views/Categories.vue"),
       meta: {
-          title: "Категории тестов",
+        title: "Категории тестов",
       },
     },
     {
@@ -37,7 +38,7 @@ const router = new Router({
       name: "quiz",
       component: () => import(/* webpackChunkName: "quiz" */ "./views/Quiz.vue"),
       meta: {
-          title: "Добавление теста",
+        title: "Добавление теста",
       },
     },
     {
@@ -45,16 +46,21 @@ const router = new Router({
       name: "not-found",
       component: () => import(/* webpackChunkName: "quiz" */ "./views/404.vue"),
       meta: {
-          title: "Страница не найдена",
+        title: "Страница не найдена",
       },
     },
   ],
 });
 
 router.beforeEach((to, from, next) => {
-    // не будет работать для SSR
-    document.title = to.meta.title;
-    next();
+  // не будет работать для SSR
+  document.title = to.meta.title;
+  store.dispatch("SHOW_PRELOADER").catch(console.log);
+  next();
+});
+
+router.afterEach(() => {
+  store.dispatch("HIDE_PRELOADER").catch(console.log);
 });
 
 export default router;
