@@ -59,12 +59,11 @@ export default {
   },
 
   methods: {
-    validate (){},
+    validate() {},
     addQuestion() {
-
       let idNewQuestion = 1;
 
-      this.questions.forEach(question => {
+      this.questions.forEach((question) => {
         if (question.hasOwnProperty('id') && question.id >= idNewQuestion) {
           idNewQuestion = question.id + 1;
         }

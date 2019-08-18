@@ -44,7 +44,7 @@ export default {
   props: ['question'],
 
   components: {
-    QuizQuestionVariant
+    QuizQuestionVariant,
   },
 
   data: () => ({
@@ -61,11 +61,10 @@ export default {
   }),
 
   methods: {
-    addVariant () {
-
+    addVariant() {
       let idNewQuestion = 1;
 
-      this.question.answers.forEach(answer => {
+      this.question.answers.forEach((answer) => {
         if (answer.id >= idNewQuestion) {
           idNewQuestion = answer.id + 1;
         }
@@ -77,8 +76,8 @@ export default {
         text: '',
       });
     },
-  }
-}
+  },
+};
 </script>
 
 <style lang="css">

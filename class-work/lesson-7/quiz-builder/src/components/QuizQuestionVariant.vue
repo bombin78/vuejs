@@ -32,9 +32,9 @@ export default {
   data: () => ({}),
 
   methods: {
-    validate: function(){}
-  }
-}
+    validate() {},
+  },
+};
 </script>
 
 <style lang="css">
