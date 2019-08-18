@@ -13,8 +13,8 @@
         <v-btn :to="{ name: 'quiz' }" color="primary" dark class="mb-2">Добавить тест</v-btn>
       </v-toolbar>
     </template>
-    <template #item.action>
-      <v-btn text small color="success">
+    <template #item.action="{ item }">
+      <v-btn :to="{ name: 'quiz-edit', params: {id: item.id }}" text small color="success">
         <v-icon>mdi-pencil</v-icon>
         Изменить
       </v-btn>

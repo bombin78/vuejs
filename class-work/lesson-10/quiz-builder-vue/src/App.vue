@@ -93,7 +93,7 @@ export default {
   mounted() {
     const preloader = document.querySelector(".preloader");
     preloader.style.display = "none";
-  }
+  },
 };
 </script>
 

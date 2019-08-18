@@ -42,6 +42,14 @@ const router = new Router({
       },
     },
     {
+      path: "/quiz/:id",
+      name: "quiz-edit",
+      component: () => import(/* webpackChunkName: "quiz" */ "./views/Quiz.vue"),
+      meta: {
+        title: "Редактирование теста",
+      },
+    },
+    {
       path: "*", // * - совпадает с любым URL, с которым не было совпадения выше
       name: "not-found",
       component: () => import(/* webpackChunkName: "quiz" */ "./views/404.vue"),

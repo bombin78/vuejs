@@ -3,14 +3,14 @@
   <v-layout>
     <v-flex md8>
       <v-sheet class="pa-5 elevation-2 mb-4">
-        <h1 class="headline mb-2">Добавление теста</h1>
+        <h1 class="headline mb-2">{{ $route.meta.title }}</h1>
         <v-divider class="mb-4"></v-divider>
-        <quiz-form :quiz="quiz"></quiz-form>
+        <quiz-form />
       </v-sheet>
-      <v-alert v-if="quiz.questions.length === 0" type="info">Список вопросов пуст</v-alert>
+      <v-alert v-if="currentTest.questions.length === 0" type="info">Список вопросов пуст</v-alert>
       <v-expansion-panels v-else v-model="questionPanels" multiple>
         <v-expansion-panel
-          v-for="(question, index) in quiz.questions"
+          v-for="(question, index) in currentTest.questions"
           :key="question.id"
           class="mb-5"
         >
@@ -50,49 +50,27 @@
 import QuizForm from "../components/QuizForm.vue";
 import QuizQuestion from "../components/QuizQuestion.vue";
 
-const questionTemplate = {
-  text: "Текст вопроса",
-  variants: [
-    {
-      id: "_1",
-      text: "Вариант ответа один",
-      isAnswer: false,
-    },
-    {
-      id: "_2",
-      text: "Вариант ответа второй",
-      isAnswer: false,
-    },
-  ],
-};
-
 export default {
   name: "Test",
   components: { QuizForm, QuizQuestion },
   data() {
     return {
-      quiz: {
-        title: "",
-        category: null,
-        brief: "",
-        questions: [],
-      },
       questionPanels: [],
     };
   },
   methods: {
     addQuestion() {
-      const question = JSON.parse(JSON.stringify(questionTemplate));
-      const id = this.quiz.questions.length + 1;
-      question.id = `_${id}`;
-      this.questionPanels.push(this.quiz.questions.length);
-      this.quiz.questions.push(question);
     },
     closePanel(id) {
       const index = this.questionPanels.indexOf(id);
       if (index !== -1) {
         this.questionPanels.splice(index, 1);
       }
+    },
+  },
+  computed: {
+    currentTest() {
+      return this.$store.state.currentTest;
     },
   },
 };
