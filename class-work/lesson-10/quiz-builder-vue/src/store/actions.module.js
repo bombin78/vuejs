@@ -17,8 +17,10 @@ import {
 } from "./mutations.type";
 
 export default {
-  async [LOAD_CATEGORIES]({ commit }) {
+  async [LOAD_CATEGORIES]({ commit, dispatch }) {
+    dispatch(SHOW_PRELOADER);
     commit(SET_CATEGORIES, await Categories.all());
+    dispatch(HIDE_PRELOADER);
   },
   async [LOAD_TESTS]({ commit }) {
     commit(SET_TESTS, await Tests.all());

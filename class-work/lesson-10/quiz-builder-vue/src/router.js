@@ -71,7 +71,9 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
-  store.dispatch(HIDE_PRELOADER).catch(console.log);
+    if(!store.getters.preventHidePreloaderInRouter) {
+        store.dispatch(HIDE_PRELOADER).catch(console.log);
+    }
 });
 
 export default router;
