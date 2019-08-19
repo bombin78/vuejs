@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
 import store from "./store";
+import Home from "./views/Home.vue";
+import { SHOW_PRELOADER, HIDE_PRELOADER } from "./store/actions.type";
 
 Vue.use(Router);
 
@@ -50,9 +51,9 @@ const router = new Router({
       },
     },
     {
-      path: "*", // * - совпадает с любым URL, с которым не было совпадения выше
+      path: "*", // * - совпадает с любым URL, c которым не было совпадения выше
       name: "not-found",
-      component: () => import(/* webpackChunkName: "quiz" */ "./views/404.vue"),
+      component: () => import(/* webpackChunkName: "404" */ "./views/404.vue"),
       meta: {
         title: "Страница не найдена",
       },
@@ -61,14 +62,16 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  // не будет работать для SSR
+  // объект to соответствует машруту, КУДА пытается попасть пользователь
   document.title = to.meta.title;
-  store.dispatch("SHOW_PRELOADER").catch(console.log);
+  store.dispatch(SHOW_PRELOADER).catch(console.log);
+  // next() - функция обратного вызова, которая передаёт управление следующему хуку,
+  // а также позволяет блокировать переходы к конкретным машрутам или выполнять редиректы
   next();
 });
 
 router.afterEach(() => {
-  store.dispatch("HIDE_PRELOADER").catch(console.log);
+  store.dispatch(HIDE_PRELOADER).catch(console.log);
 });
 
 export default router;

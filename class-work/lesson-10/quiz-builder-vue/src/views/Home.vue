@@ -14,7 +14,7 @@
       </v-toolbar>
     </template>
     <template #item.action="{ item }">
-      <v-btn :to="{ name: 'quiz-edit', params: {id: item.id }}" text small color="success">
+      <v-btn :to="{ name: 'quiz-edit', params: { id: item.id } }" text small color="success">
         <v-icon>mdi-pencil</v-icon>
         Изменить
       </v-btn>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Home",
   data() {

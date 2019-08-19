@@ -60,6 +60,7 @@ export default {
   },
   methods: {
     addQuestion() {
+
     },
     closePanel(id) {
       const index = this.questionPanels.indexOf(id);

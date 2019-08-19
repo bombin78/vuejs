@@ -28,43 +28,47 @@
       </v-flex>
       <v-flex xs12>
         <v-textarea
-            outlined
-            v-model="brief"
-            label="Примечание к тесту"
-            v-validate="'required'"
-            data-vv-name="brief"
-            data-vv-as="примечание"
-            @blur="$validator.validate('brief')"
-            :error-messages="errors.collect('brief')"
-            />
+          outlined
+          v-model="brief"
+          label="Примечание к тесту"
+          v-validate="'required'"
+          data-vv-name="brief"
+          data-vv-as="примечание"
+          @blur="$validator.validate('brief')"
+          :error-messages="errors.collect('brief')"
+        />
       </v-flex>
+      {{ test }}
     </v-layout>
   </v-form>
 </template>
 
 <script>
 import { mapState } from "vuex";
+import { CHANGE_CURRENT_TEST_DATA } from "../store/actions.type";
 
-const mapTwoWayStateBindihgs = function (...props) {
+function mapTwoWayStateBindings(...props) {
   const data = {};
-  for (const prop of props) {
+
+  props.forEach((prop) => {
     data[prop] = {
       get() {
-        return this.$store.state.currentTest.prop;
+        return this.$store.state.currentTest[prop];
       },
       set(value) {
-        this.$store.dispatch("CHANGE_CURRENT_TEST_DATA", { [prop]: value });
+        this.$store.dispatch(CHANGE_CURRENT_TEST_DATA, { [prop]: value });
       },
     };
-  }
+  });
+
   return data;
-};
+}
 
 export default {
   name: "QuizForm",
   computed: {
     ...mapState(["categories"]),
-    ...mapTwoWayStateBindihgs("title", "brief", "category"),
+    ...mapTwoWayStateBindings("title", "brief", "category"),
   },
   methods: {
     validate() {
