@@ -5,7 +5,11 @@
         <v-text-field
           v-model="title"
           label="Название теста"
-          required
+          v-validate="'required|max:120'"
+          data-vv-name="title"
+          data-vv-as="название"
+          @blur="$validator.validate('title')"
+          :error-messages="errors.collect('title')"
         />
       </v-flex>
       <v-flex xs12 md6>
@@ -15,10 +19,24 @@
           item-value="id"
           label="Категория"
           v-model="category"
+          v-validate="'required'"
+          data-vv-name="category"
+          data-vv-as="категория"
+          @blur="$validator.validate('category')"
+          :error-messages="errors.collect('category')"
         />
       </v-flex>
       <v-flex xs12>
-        <v-textarea outlined v-model="brief" label="Примечание к тесту"/>
+        <v-textarea
+            outlined
+            v-model="brief"
+            label="Примечание к тесту"
+            v-validate="'required'"
+            data-vv-name="brief"
+            data-vv-as="примечание"
+            @blur="$validator.validate('brief')"
+            :error-messages="errors.collect('brief')"
+            />
       </v-flex>
     </v-layout>
   </v-form>
@@ -29,7 +47,7 @@ import { mapState } from "vuex";
 
 const mapTwoWayStateBindihgs = function (...props) {
   const data = {};
-  for (let prop of props) {
+  for (const prop of props) {
     data[prop] = {
       get() {
         return this.$store.state.currentTest.prop;
@@ -47,6 +65,11 @@ export default {
   computed: {
     ...mapState(["categories"]),
     ...mapTwoWayStateBindihgs("title", "brief", "category"),
+  },
+  methods: {
+    validate() {
+      return this.$validator.validateAll();
+    },
   },
 };
 </script>

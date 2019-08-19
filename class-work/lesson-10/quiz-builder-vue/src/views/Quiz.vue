@@ -5,7 +5,7 @@
       <v-sheet class="pa-5 elevation-2 mb-4">
         <h1 class="headline mb-2">{{ $route.meta.title }}</h1>
         <v-divider class="mb-4"></v-divider>
-        <quiz-form />
+        <quiz-form ref="quizForm" />
       </v-sheet>
       <v-alert v-if="currentTest.questions.length === 0" type="info">Список вопросов пуст</v-alert>
       <v-expansion-panels v-else v-model="questionPanels" multiple>
@@ -35,7 +35,7 @@
         </v-toolbar-items>
         <v-spacer />
         <v-toolbar-items>
-          <v-btn text color="success">
+          <v-btn @click="saveQuiz" text color="success">
             <v-icon>mdi-check-bold</v-icon>
             Сохранить тест
           </v-btn>
@@ -66,6 +66,10 @@ export default {
       if (index !== -1) {
         this.questionPanels.splice(index, 1);
       }
+    },
+    saveQuiz() {
+      // вызов метода дочернего компонента
+      this.$refs.quizForm.validate();
     },
   },
   computed: {

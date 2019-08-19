@@ -15,8 +15,8 @@ export default new Vuex.Store({
       brief: "",
       category: null,
       questions: [],
-      showPreloader: false,
     },
+    showPreloader: false,
   },
   mutations: {
     SET_CATEGORIES(state, categories) {

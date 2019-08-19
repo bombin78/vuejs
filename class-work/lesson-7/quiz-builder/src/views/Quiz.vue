@@ -33,60 +33,32 @@
 </template>
 
 <script>
-import Categories from '../services/Categories.js';
 import QuizForm from '../components/QuizForm.vue';
 import QuizQuestion from '../components/QuizQuestion.vue';
 
 export default {
-  name: 'Quiz',
+  name: 'Test',
 
-  components: {
-    QuizForm,
-    QuizQuestion,
-  },
+  components: { QuizForm, QuizQuestion,},
 
   data() {
     return {
-      valid: true,
-      categories: Categories.all(),
-      testParams: {
-        name: '',
-        category: '',
-        note: '',
-      },
-      questions: [],
+      questionPanels: [],
     };
   },
 
   methods: {
-    validate() {},
-    addQuestion() {
-      let idNewQuestion = 1;
-
-      this.questions.forEach((question) => {
-        if (question.hasOwnProperty('id') && question.id >= idNewQuestion) {
-          idNewQuestion = question.id + 1;
-        }
-      });
-
-      this.questions.push({
-        id: idNewQuestion,
-        answers: [
-          {
-            id: 1,
-            isRight: false,
-            text: '',
-          },
-          {
-            id: 2,
-            isRight: false,
-            text: '',
-          },
-        ],
-      });
-
-      console.log('this.testParams', this.testParams);
-      console.log('this.questions', this.questions);
+    addQuestion() {},
+    closePanel(id) {
+      const index = this.questionPanels.indexOf(id);
+      if (index !== -1) {
+        this.questionPanels.splise(index, 1);
+      }
+    },
+    computed: {
+      currentTest() {
+        return this.$store.state.currentTest;
+      },
     },
   },
 };
