@@ -6,6 +6,8 @@ import BaseLayout from "./components/BaseLayout.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
 import store from "./store/index";
+import { auth } from "./plugins/firebase";
+import { SET_USER } from "./store/mutations.type";
 
 Vue.config.productionTip = false;
 
@@ -14,9 +16,20 @@ Validator.localize("ru", ru);
 
 Vue.component("BaseLayout", BaseLayout);
 
-new Vue({
+const app = new Vue({
   router,
   vuetify,
   store,
   render: h => h(App),
 }).$mount("#app");
+
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    store.commit(SET_USER, {
+      id: user.uid,
+      email: user.email,
+    });
+  }
+
+  app.$forceUpdate();
+});

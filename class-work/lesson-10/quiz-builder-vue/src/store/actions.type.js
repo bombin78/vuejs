@@ -3,3 +3,6 @@ export const LOAD_TESTS = "LOAD_TESTS";
 export const SHOW_PRELOADER = "SHOW_PRELOADER";
 export const HIDE_PRELOADER = "HIDE_PRELOADER";
 export const CHANGE_CURRENT_TEST_DATA = "CHANGE_CURRENT_TEST_DATA";
+export const SIGNUP = "SIGNUP";
+export const SIGNIN = "SIGNIN";
+export const SIGNOUT = "SIGNOUT";

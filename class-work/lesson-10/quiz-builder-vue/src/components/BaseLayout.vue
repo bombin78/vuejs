@@ -33,7 +33,7 @@
       <v-spacer></v-spacer>
       <v-btn :to="{ name: 'about' }" class="mr-2" text>Справочник <v-icon>mdi-help</v-icon></v-btn>
       <v-btn text>
-        <span class="mr-2">Выход</span>
+        <span @click="logout" class="mr-2">Выход</span>
         <v-icon>mdi-logout</v-icon>
       </v-btn>
     </v-app-bar>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { LOAD_CATEGORIES, LOAD_TESTS } from "../store/actions.type";
+import { LOAD_CATEGORIES, LOAD_TESTS, SIGNOUT } from "../store/actions.type";
 
 export default {
   name: "App",
@@ -66,6 +66,10 @@ export default {
   methods: {
     toggleDrawer() {
       this.showDrawer = !this.showDrawer;
+    },
+    async logout() {
+      await this.$store.dispatch(SIGNOUT);
+      this.$router.push({ name: "login" });
     },
   },
   beforeCreate() {

@@ -9,3 +9,4 @@ export const CLEAR_CURRENT_TEST = "CLEAR_CURRENT_TEST";
 export const REMOVE_TEST = "REMOVE_TEST";
 export const UPDATE_TEST = "UPDATE_TEST";
 export const SET_PRELOADER = "SET_PRELOADER";
+export const SET_USER = "SET_USER";

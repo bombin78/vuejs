@@ -5,7 +5,8 @@
         <v-sheet class="pa-5 elevation-2 ma-3">
           <h1 class="headline mb-2">Регистрация</h1>
           <v-divider class="mb-4"></v-divider>
-          <v-form>
+          <v-alert v-if="errorMessage.length !== 0" type="error">{{errorMessage}}</v-alert>
+          <v-form @submit.prevent="signUp">
             <v-text-field
               label="Ваш email"
               v-model="email"
@@ -37,7 +38,7 @@
               :error-messages="errors.collect('confirmation')"
             />
             <v-layout class="mt-4">
-              <v-btn color="success">Зарегистрироваться</v-btn>
+              <v-btn type="submit" color="success">Зарегистрироваться</v-btn>
               <v-spacer></v-spacer>
               <v-btn :to="{ name: 'login' }">Вход на сайт</v-btn>
             </v-layout>
@@ -48,6 +49,8 @@
   </v-container>
 </template>
 <script>
+import { SIGNUP } from "../store/actions.type";
+
 export default {
   name: "Register",
   data() {
@@ -55,7 +58,23 @@ export default {
       confirmation: "",
       pass: "",
       email: "",
+      errorMessage: "",
     };
+  },
+  methods: {
+    async signUp() {
+      if (await this.$validator.validateAll()) {
+        try {
+          await this.$store.dispatch(SIGNUP, {
+            email: this.email,
+            password: this.pass,
+          });
+          this.$router.push({ name: "home" });
+        } catch (err) {
+          this.errorMessage = err.message;
+        }
+      }
+    },
   },
   beforeCreate() {
     if (this.$store.state.user.id) {

@@ -1,11 +1,15 @@
 import Categories from "../services/Categories";
 import Tests from "../services/Tests";
+import User from "../services/User";
 import {
   LOAD_CATEGORIES,
   LOAD_TESTS,
   SHOW_PRELOADER,
   HIDE_PRELOADER,
   CHANGE_CURRENT_TEST_DATA,
+  SIGNUP,
+  SIGNIN,
+  SIGNOUT,
 } from "./actions.type";
 import {
   SET_CATEGORIES,
@@ -14,6 +18,7 @@ import {
   SET_CURRENT_TEST_BRIEF,
   SET_CURRENT_TEST_CATEGORY,
   SET_PRELOADER,
+  SET_USER,
 } from "./mutations.type";
 
 export default {
@@ -41,5 +46,26 @@ export default {
     if (typeof data.category !== "undefined") {
       commit(SET_CURRENT_TEST_CATEGORY, data.category);
     }
+  },
+  async [SIGNUP]({ commit }, { email, password }) {
+    const user = await User.createUser(email, password);
+    commit(SET_USER, {
+      id: user.uid,
+      email: user.email,
+    });
+  },
+  async [SIGNIN]({ commit }, { email, password }) {
+    const user = await User.getUserByCredentials(email, password);
+    commit(SET_USER, {
+      id: user.uid,
+      email: user.email,
+    });
+  },
+  async [SIGNOUT]({ commit }) {
+    await User.logout();
+    commit(SET_USER, {
+      id: null,
+      email: "",
+    });
   },
 };

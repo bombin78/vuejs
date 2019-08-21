@@ -10,6 +10,7 @@ import {
   REMOVE_TEST,
   UPDATE_TEST,
   SET_PRELOADER,
+  SET_USER,
 } from "./mutations.type";
 
 export default {
@@ -58,5 +59,7 @@ export default {
   [SET_PRELOADER](state, status) {
     state.showPreloader = status;
   },
-
+  [SET_USER](state, user) {
+    state.user = user;
+  },
 };
