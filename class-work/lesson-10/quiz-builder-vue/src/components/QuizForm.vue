@@ -38,7 +38,6 @@
           :error-messages="errors.collect('brief')"
         />
       </v-flex>
-      {{ test }}
     </v-layout>
   </v-form>
 </template>

@@ -32,13 +32,13 @@ export default {
     commit(SET_PRELOADER, false);
   },
   async [CHANGE_CURRENT_TEST_DATA]({ commit }, data) {
-    if (data.title) {
+    if (typeof data.title !== "undefined") {
       commit(SET_CURRENT_TEST_TITLE, data.title);
     }
-    if (data.brief) {
+    if (typeof data.brief !== "undefined") {
       commit(SET_CURRENT_TEST_BRIEF, data.brief);
     }
-    if (data.category) {
+    if (typeof data.category !== "undefined") {
       commit(SET_CURRENT_TEST_CATEGORY, data.category);
     }
   },

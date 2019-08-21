@@ -17,12 +17,16 @@ export default new Vuex.Store({
       questions: [],
     },
     showPreloader: false,
+    user: {
+      id: null,
+      email: "",
+    },
   },
   mutations,
   actions,
   getters: {
     preventHidePreloaderInRouter(state) {
-        return state.categories.length === 0;
+      return state.categories.length === 0;
     },
-  }
+  },
 });

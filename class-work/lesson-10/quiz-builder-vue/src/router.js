@@ -16,6 +16,7 @@ const router = new Router({
       component: Home,
       meta: {
         title: "Главная страница конструктора",
+        requiresAuth: true,
       },
     },
     {
@@ -24,6 +25,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "about" */ "./views/About.vue"),
       meta: {
         title: "Справочник",
+        requiresAuth: true,
       },
     },
     {
@@ -32,6 +34,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "categories" */ "./views/Categories.vue"),
       meta: {
         title: "Категории тестов",
+        requiresAuth: true,
       },
     },
     {
@@ -40,6 +43,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "quiz" */ "./views/Quiz.vue"),
       meta: {
         title: "Добавление теста",
+        requiresAuth: true,
       },
     },
     {
@@ -48,6 +52,25 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "quiz" */ "./views/Quiz.vue"),
       meta: {
         title: "Редактирование теста",
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import(/* webpackChunkName: "login" */ "./views/Login.vue"),
+      meta: {
+        title: "Вход в конструктор",
+        requiresAuth: false,
+      },
+    },
+    {
+      path: "/register",
+      name: "register",
+      component: () => import(/* webpackChunkName: "register" */ "./views/Register.vue"),
+      meta: {
+        title: "Регистрация",
+        requiresAuth: false,
       },
     },
     {
@@ -56,9 +79,18 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "404" */ "./views/404.vue"),
       meta: {
         title: "Страница не найдена",
+        requiresAuth: true,
       },
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.state.user.id) {
+    return next({ name: "login" });
+  }
+
+  return next();
 });
 
 router.beforeEach((to, from, next) => {
@@ -71,9 +103,9 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach(() => {
-    if(!store.getters.preventHidePreloaderInRouter) {
-        store.dispatch(HIDE_PRELOADER).catch(console.log);
-    }
+  if (!store.getters.preventHidePreloaderInRouter) {
+    store.dispatch(HIDE_PRELOADER).catch(console.log);
+  }
 });
 
 export default router;
