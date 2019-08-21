@@ -7,7 +7,6 @@ import { SHOW_PRELOADER, HIDE_PRELOADER } from "./store/actions.type";
 Vue.use(Router);
 
 const router = new Router({
-  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
